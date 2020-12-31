@@ -5,15 +5,24 @@ class PlaylistsController < ApplicationController
   before_action :find_playlist, only: [:create]
   
   def index
-    @playlist = Playlist.chronological
+    case params[:filter]
+    when "popular"
+      @playlist = Playlist.popular
+    else
+      @playlist = Playlist.chronological
+    end
     if current_user
       @follows = current_user.follows.map { |f| f.playlist_id }
+      @likes = current_user.likes.map { |l| l.playlist_id }
     end
   end
   
   def show
     @playlist = Playlist.find(params[:id])
     @tracks = Track.where("playlist_id = ?", @playlist.id)
+    if current_user
+      @like = current_user.likes.find_by(playlist_id: @playlist.id)
+    end
   end
 
   def new
@@ -22,7 +31,7 @@ class PlaylistsController < ApplicationController
 
   def create
     playlist = Playlist.new
-    playlist.name = find_playlist_name(@playlist_id)
+    playlist.name = find_playlist_name(@playlist_id).split("OST")[0].strip
     playlist.image_url = find_picture(@playlist_id)
     playlist.spotify_id = params[:playlist][:id].split("spotify:playlist:")[1]
     tracks = find_tracks(@playlist_id)

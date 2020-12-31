@@ -11,13 +11,13 @@
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                  <p class="title is-5 has-text-weight-bold"><%= pretty_title(p.name) %></p>
+                  <p class="title is-6 has-text-weight-bold"><%= pretty_title(p.name) %></p>
                   <p class="subtitle is-6"><%= p.tracks.size %> tracks</p>
                   <div class="level">
                     <div class="level-left">
                       <div class="level-item">
-                        <p class="is-size-7 is-family-secondary">
-                          Added <%= time_ago_in_words p.created_at %> ago
+                        <p class="is-size-7">
+                          <%= p.likes.size %> likes
                         </p>
                       </div>
                     </div>
@@ -32,8 +32,21 @@
                           <% end%>
                         <% end %>
                       </div>
+                      <div class="level-item">
+                        <% if current_user && @likes.include?(p.id) %>
+                          <%= button_to "Unlike", unlike_path(p), class: "button is-link is-small",
+                              method: :delete %>
+                        <% elsif current_user %>
+                          <%= button_to "Like", like_path(p), class: "button is-link is-small" %>
+                        <% end %>
+                      </div>
                     </div>
-                  </div>      
+                  </div>   
+                  <div class="content">
+                    <p class="is-size-7 is-family-secondary">
+                      Added <%= time_ago_in_words p.created_at %> ago
+                    </p>
+                  </div>   
                 </div>
               </div>
             </div>

@@ -6,4 +6,6 @@ class User < ApplicationRecord
   validates :username, length: { minimum: 3 }, 
             format: { with: /\A[A-Z0-9]+\z/i }
   has_many :follows, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_playlists, through: :likes, source: :playlist
 end

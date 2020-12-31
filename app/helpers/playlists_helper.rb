@@ -6,6 +6,6 @@ module PlaylistsHelper
   end
 
   def pretty_title(title)
-    title.split.map(&:capitalize).join(' ')
+    title.split.map(&:upcase).join(' ')
   end
 end

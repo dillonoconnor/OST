@@ -17,6 +17,7 @@
   <div class="navbar-menu is-family-secondary">
     <div class="navbar-start">
       <%= link_to "Add OST", new_playlist_path, class: "navbar-item" %>
+      <%= link_to "Most Liked", filtered_playlists_path(:popular), class: "navbar-item" %>
     </div>
     <div class="navbar-end">
       <div class="navbar-item">
