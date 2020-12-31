@@ -1,0 +1,39 @@
+<nav class="navbar is-black" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <div class="navbar-item">
+      <%= link_to image_tag("soundtrack.png", alt: "OST logo"), root_path %>
+    </div>
+    <div class="navbar-item">
+      <%= link_to "Drama OSTs", root_path, 
+          class: "navbar-item has-text-weight-bold has-text-white is-uppercase" %>
+    </div>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu is-family-secondary">
+    <div class="navbar-start">
+      <%= link_to "Add OST", new_playlist_path, class: "navbar-item" %>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <% if current_user %>
+            <%= link_to "Sign Out", logout_path, class: "button is-dark has-text-weight-semibold",
+                        method: :delete %>
+          <% else %>
+            <%= link_to "Sign Up", new_user_path, class: "button is-primary has-text-weight-semibold" %>
+            <%= link_to "Log In", login_path, class: "button is-dark has-text-weight-semibold" %>
+          <% end %>
+          <% if current_user && session[:spotify_user].nil? %>
+            <%= link_to 'Link Spotify', '/auth/spotify', class: "button is-success has-text-weight-semibold" %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>

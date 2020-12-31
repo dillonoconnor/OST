@@ -1,0 +1,23 @@
+<%= form_with url: session_url, local: true do |f| %>
+
+  <div class="field">
+    <%= f.label :username_or_email, class: "has-text-white" %>
+    <div class="control">
+      <%= f.text_field :username_or_email, class: "input" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, class: "has-text-white" %>
+    <div class="control">
+      <%= f.password_field :password, class: "input" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= f.submit "Sign In", class: "button is-primary has-text-weight-semibold" %>
+    </div>
+  </div>
+
+<% end %>

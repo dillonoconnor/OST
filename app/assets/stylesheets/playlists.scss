@@ -1,0 +1,16 @@
+// Place all the styles related to the Playlists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.card {
+  opacity: 0.75;
+}
+
+.card:hover {
+  transition-duration: 0.3s;
+  opacity: 1;
+}
+
+img {
+  object-fit: cover;
+}
