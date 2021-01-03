@@ -37,7 +37,7 @@
                           <%= button_to "Unlike", unlike_path(p), class: "button is-link is-small",
                               method: :delete %>
                         <% elsif current_user %>
-                          <%= button_to "Like", like_path(p), class: "button is-link is-small" %>
+                          <%= button_to "Like 👍", like_path(p), class: "button is-link is-small" %>
                         <% end %>
                       </div>
                     </div>
@@ -54,4 +54,5 @@
       </div>
     <% end %>
   </div>
+    <%= will_paginate @playlist, class: "apple_pagination" %>
 </div>

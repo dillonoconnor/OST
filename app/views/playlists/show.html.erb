@@ -33,7 +33,9 @@
     <%= content_tag(:iframe,'', width: 300, height: 380, src: "https://open.spotify.com/embed/playlist/#{@playlist.spotify_id}") %>
   </div>
 </div>
-<%= button_to "Delete Playlist", playlist_path, method: :delete,
-    data: { confirm: "Are you sure?" }, class: "button is-danger" %>
+<% if current_user_admin? %>
+  <%= button_to "Delete Playlist", playlist_path, method: :delete,
+      data: { confirm: "Are you sure?" }, class: "button is-danger" %>
+<% end %>
 </section>
 
