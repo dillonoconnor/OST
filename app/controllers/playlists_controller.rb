@@ -26,6 +26,9 @@ class PlaylistsController < ApplicationController
   end
 
   def new
+    if params[:playlist_name]
+      @playlists = search_playlists(params[:playlist_name])
+    end
     @playlist = Playlist.new
   end
 
@@ -33,7 +36,11 @@ class PlaylistsController < ApplicationController
     playlist = Playlist.new
     playlist.name = find_playlist_name(@playlist_id).split("OST")[0].strip
     playlist.image_url = find_picture(@playlist_id)
-    playlist.spotify_id = params[:playlist][:id].split("spotify:playlist:")[1]
+    if params[:playlist_id]
+      playlist.spotify_id = params[:playlist_id]
+    else
+      playlist.spotify_id = params[:playlist][:id].split("spotify:playlist:")[1]
+    end
     tracks = find_tracks(@playlist_id)
     tracks.each do |track|
       playlist.tracks.new(title: track.name, 
@@ -67,7 +74,12 @@ class PlaylistsController < ApplicationController
       params.require(:playlist).permit(:id)
     end
 
-    def find_playlist(id = params[:playlist][:id].split("spotify:playlist:")[1])
+    def find_playlist
+      if params[:playlist]
+        id = params[:playlist][:id].split("spotify:playlist:")[1]
+      elsif params[:playlist_id]
+        id = params[:playlist_id]
+      end
       @playlist_id = RSpotify::Playlist.find_by_id(id)
     end
 
@@ -83,5 +95,8 @@ class PlaylistsController < ApplicationController
       playlist.images.first['url']
     end
 
-    
+    def search_playlists(playlist)
+      RSpotify::Playlist.search(playlist)
+    end
+
 end
