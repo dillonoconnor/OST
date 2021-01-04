@@ -19,7 +19,7 @@
         <% @tracks.each do |track| %>
           <tr>
             <td class="is-flex is-align-items-center">
-              <%= inline_svg_tag "youtube.svg", size: "3%" %>
+              <%= inline_svg_tag "youtube.svg", size: "3%", color: "white" %>
               <span style="display: inline-block; width: 0.5rem"></span>
               <%= youtube_search_link(track) %>
             </td>
@@ -49,7 +49,7 @@
                   class: "control textarea" %>
             </div>
             <div class="field">
-              <%= f.submit "Post Comment", class: "control button is-primary" %>
+              <%= f.submit "Post Comment", class: "control button is-primary has-text-weight-semibold" %>
             </div>
           <% end %>
         </div>
@@ -63,17 +63,19 @@
           <div class="media-content">
             <div class="content">
               <p>
-                <strong><%= current_user.username %></strong>
+                <strong><%= c.user.username %></strong>
                 <small><%= time_ago_in_words(c.created_at) %> ago</small>
                 <br>
                 <%= c.message %>
               </p>
             </div>
           </div>
+          <% if current_user && c.user == current_user %>
           <div class="media-right">
             <%= button_to "X", playlist_comment_path(@playlist, c), 
                 class: "button is-small is-rounded is-danger", method: :delete %>
           </div>
+          <% end %>
         </article>
       </div>
       <% end %>

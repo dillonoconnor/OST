@@ -14,12 +14,49 @@
  *= require_self
  */
 
+ // Fonts Override
  $family-primary: "Open Sans";
  $family-secondary: "Roboto";
- $notification-padding: 0.5rem 2.5rem 0.5rem 1.5rem;
+
+ // Navbar Override
+ $navbar-item-hover-color: #fff;
+
+ // Table Override
+ $table-background-color: transparent;
+ $table-row-hover-background-color:  rgb(50, 50, 61);
+ $table-color: #fff;
+ $table-cell-heading-color: #fff;
+ $table-cell-border: none;
+
  @import "bulma";
 
- .field_with_errors .label {
-   font-weight: bold;
-   color: rgb(233, 129, 129);
- }
+// General
+html {
+ background: rgb(42, 42, 51);
+}
+
+.field_with_errors .label {
+  font-weight: bold;
+  color: rgb(233, 129, 129);
+}
+
+// Navbar
+.navbar {
+  background: transparent;
+}
+.navbar-item, .title, .label {
+  color: #fff;
+}
+.navbar-item:hover {
+  font-weight: bold;
+}
+// Table
+table a, .table thead th {
+  color: #fff;
+  &:hover {
+    color: rgb(116, 129, 245);
+  }
+}
+.table thead th {
+  text-transform: uppercase;
+}

@@ -23,10 +23,10 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @playlist = Playlist.find(params[:playlist_id])
-    if @comment.user_id == current_user.id
+    if current_user && @comment.user_id == current_user.id
       @comment.destroy
-    end
-    redirect_to @playlist
+      redirect_to @playlist
+    end 
   end
 
     private

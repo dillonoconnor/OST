@@ -2,42 +2,28 @@
 
 <div class="field">
   <%= f.label :email, class: "label" %>
-  <div class="control">
-    <%= f.text_field :email, class: "input" %>
-  </div>
+  <%= f.text_field :email, class: "control input" %>
 </div>
 
 
 <div class="field">
   <%= f.label :username, class: "label" %>
-  <div class="control">
-    <%= f.text_field :username, class: "input" %>
-  </div>
+  <%= f.text_field :username, class: "control input" %>
 </div>
-
-
 
 <div class="field">
   <%= f.label :password, class: "label" %>
-  <div class="control">
-    <%= f.password_field :password, class: "input" %>
-  </div>
+  <%= f.password_field :password, class: "control input" %>
 </div>
-
-
 
 <div class="field">
   <%= f.label :password_confirmation, "Confirm Password", 
               class: "label" %>
-  <div class="control">
-    <%= f.password_field :password_confirmation, class: "input" %>
-  </div>
+  <%= f.password_field :password_confirmation, class: "control input" %>
 </div>
 
 <div class="field">
-  <div class="control">
-    <%= f.submit "Create Account", class: "button is-primary" %>
-  </div>
+  <%= f.submit "Create Account", class: "control button is-primary has-text-weight-semibold" %>
 </div>
 
 <% end %>
