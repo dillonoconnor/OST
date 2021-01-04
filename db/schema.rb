@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_31_154644) do
+ActiveRecord::Schema.define(version: 2021_01_03_154014) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "message"
+    t.integer "user_id", null: false
+    t.integer "playlist_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["playlist_id"], name: "index_comments_on_playlist_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "follows", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -56,6 +66,8 @@ ActiveRecord::Schema.define(version: 2020_12_31_154644) do
     t.boolean "admin", default: false
   end
 
+  add_foreign_key "comments", "playlists"
+  add_foreign_key "comments", "users"
   add_foreign_key "follows", "playlists"
   add_foreign_key "follows", "users"
   add_foreign_key "likes", "playlists"

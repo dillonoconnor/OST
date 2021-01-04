@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+
   root "playlists#index"
   resources :users
-  resources :playlists
+  resources :playlists do
+    resources :comments
+  end
   resource :session, only: :create
 
   get "login", to: "sessions#new"

@@ -23,6 +23,8 @@ class PlaylistsController < ApplicationController
     if current_user
       @like = current_user.likes.find_by(playlist_id: @playlist.id)
     end
+    @comment = Comment.new
+    @comments = Comment.where(playlist_id: params[:id])
   end
 
   def new
