@@ -1,0 +1,19 @@
+<section class="section">
+  <h1 class="title has-text-weight-bold">Edit Profile</h1>
+  <div class="columns">
+    <div class="column is-one-third">
+      <% if @user.errors.any? %>
+        <div class="box">
+          <div class="content">
+            <ol type="1">
+              <% @user.errors.full_messages.each do |e| %>
+                  <li><%= e %></li>
+              <% end %>
+            </ol>
+          </div>
+        </div>
+      <% end %>
+      <%= render 'form', user: @user %>
+    </div>
+  </div>
+</section>

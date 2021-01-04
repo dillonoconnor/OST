@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   def index
     @user = User.all
   end
+
+  def show
+    @likes = current_user.liked_playlists
+  end
   
   def new
     @user = User.new

@@ -1,0 +1,29 @@
+<section class="section has-text-white">
+  <p><strong class="has-text-weight-bold has-text-white">Email:</strong> <%= current_user.email%></p>
+  <p><strong class="has-text-weight-bold has-text-white">Username:</strong> <%= current_user.username %></p>
+  <p><strong class="has-text-weight-bold has-text-white">Joined:</strong> <%= time_ago_in_words(current_user.created_at) %> ago</p>
+  <%= link_to "Edit Profile", edit_user_path, class: "button mt-5" %>
+</section>
+<section class="section">
+  <h1 class="title has-text-weight-bold">Likes</h1>
+  <div class="columns is-multiline">
+    <% @likes.each do |l| %>
+      <div class="column is-one-fifth">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-1by1">
+              <%= link_to image_tag(l.image_url), l %>
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="subtitle is-6 has-text-weight-bold"><%= pretty_title(l.name) %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

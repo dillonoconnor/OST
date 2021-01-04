@@ -23,7 +23,11 @@
 </div>
 
 <div class="field">
-  <%= f.submit "Create Account", class: "control button is-primary has-text-weight-semibold" %>
+  <% if user.new_record? %>
+    <%= f.submit "Create Account", class: "control button is-primary has-text-weight-semibold" %>
+  <% else %>
+        <%= f.submit "Update Profile", class: "control button is-primary has-text-weight-semibold" %>
+  <% end %>
 </div>
 
 <% end %>
