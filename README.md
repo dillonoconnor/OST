@@ -1,6 +1,6 @@
 # OST
 
-OST is a user-driven database of original soundtracks (OSTs) from popular Asian dramas.  Discover and revisit music from your favorite shows.  View, follow, favorite, and listen to tracks from your favorite shows.
+OST is a user-driven database of original soundtracks (OSTs) from popular Asian dramas.  Discover and revisit music from your favorite shows.  Features:
 
 * Add new playlists
 * Follow playlists on Spotify
