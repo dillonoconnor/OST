@@ -8,5 +8,5 @@ class Playlist < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   scope :chronological, -> { order("created_at desc") }
-  scope :popular, -> { left_outer_joins(:likes).order('count(playlist_id) DESC').group('name')}
+  scope :popular, -> { left_joins(:likes).group('playlist_id').order("COUNT(playlist_id) DESC") }
 end
