@@ -7,24 +7,24 @@ RSpec.describe User, type: :model do
 
   context "on user create" do
     it "cannot have a blank username" do
-      user = User.new(username: nil)
-      expect(user).not_to be_valid
+      subject.username = nil
+      should_not be_valid
     end
     it "cannot have a username shorter than 3 chars" do
-      user = User.new(username: "aa")
-      expect(user).not_to be_valid
+      subject.username = "aa"
+      should_not be_valid
     end
     it "cannot have a blank email" do
-      user = User.new(email: nil)
-      expect(user).not_to be_valid
+      subject.email = nil
+      should_not be_valid
     end
     it "cannot have an invalid email" do
-      user = User.new(email: "foo@bar")
-      expect(user).not_to be_valid
+      subject.email = "foo@bar"
+      should_not be_valid
     end
     it "cannot have a blank password" do
-      user = User.new(password: nil)
-      expect(user).not_to be_valid
+      subject.password = nil
+      should_not be_valid
     end
     it "saves with valid attributes" do
       should be_valid
