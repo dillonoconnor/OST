@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  before { @user = User.new(username: "a"*3, email: "test@example.com", 
+  subject { @user = User.new(username: "a"*3, email: "test@example.com", 
            password: "password", password_confirmation: "password") }
 
   context "on user create" do
@@ -27,18 +27,18 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
     end
     it "saves with valid attributes" do
-      expect(@user).to be_valid
+      should be_valid
     end
     it "cannot have a duplicate email" do
-      user = @user.dup
+      user = subject.dup
       user.username = "b"*3
-      @user.save
+      subject.save
       expect { user.save! }.to raise_error(ActiveRecord::RecordInvalid)
     end
     it "cannot have a duplicate username" do
-      user = @user.dup
+      user = subject.dup
       user.email = "test2@example.com"
-      @user.save
+      subject.save
       expect { user.save! }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
