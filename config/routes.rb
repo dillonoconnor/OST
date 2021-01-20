@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root "playlists#index"
-  resources :users
+  resources :users, except: [:index]
   resources :playlists do
     resources :comments
   end
