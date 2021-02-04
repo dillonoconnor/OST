@@ -2,7 +2,6 @@ class PlaylistsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show, :spotify, :follow_playlist]
   before_action :authorize, only: [:create]
-  before_action :find_playlist, only: [:create]
   
   def index
     case params[:filter]
@@ -35,18 +34,17 @@ class PlaylistsController < ApplicationController
   end
 
   def create
-    playlist = Playlist.new
-    playlist.name = find_playlist_name(@playlist_id).split("OST")[0].strip
-    playlist.image_url = find_picture(@playlist_id)
-    if params[:playlist_id]
-      playlist.spotify_id = params[:playlist_id]
-    else
-      playlist.spotify_id = params[:playlist][:id].split("spotify:playlist:")[1]
-    end
-    tracks = find_tracks(@playlist_id)
-    tracks.each do |track|
-      playlist.tracks.new(title: track.name, 
-                          artist: track.artists.first.name)
+    spotify_playlist = find_spotify_playlist
+    playlist = Playlist.new(
+      name: find_playlist_name(spotify_playlist),
+      image_url: find_picture(spotify_playlist),
+      spotify_id: find_spotify_id
+    )
+    spotify_playlist.tracks.each do |track|
+      playlist.tracks.new(
+        title: track.name, 
+        artist: track.artists.first.name
+      )
     end
     if playlist.save
       redirect_to root_url, notice: "Successfully added playlist!"
@@ -76,25 +74,33 @@ class PlaylistsController < ApplicationController
       params.require(:playlist).permit(:id)
     end
 
-    def find_playlist
+    def sanitize_playlist_params
       if params[:playlist]
-        id = params[:playlist][:id].split("spotify:playlist:")[1]
+        params[:playlist][:id].split("spotify:playlist:")[1]
       elsif params[:playlist_id]
-        id = params[:playlist_id]
+        params[:playlist_id]
       end
+    end
+
+    def find_spotify_playlist
+      id = sanitize_playlist_params
       @playlist_id = RSpotify::Playlist.find_by_id(id)
     end
 
     def find_playlist_name(playlist)
-      playlist.name
-    end
-
-    def find_tracks(playlist)
-      playlist.tracks.each { |track| }
+      playlist.name.split("OST")[0].strip
     end
 
     def find_picture(playlist)
       playlist.images.first['url']
+    end
+
+    def find_spotify_id
+      if params[:playlist_id]
+        params[:playlist_id]
+      else
+        params[:playlist][:id].split("spotify:playlist:").first
+      end
     end
 
     def search_playlists(playlist)
