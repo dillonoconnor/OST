@@ -54,7 +54,7 @@ class PlaylistsController < ApplicationController
   end
 
   def destroy
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.find_by(id: params[:id])
     @playlist.destroy
     redirect_to root_url, notice: "Playlist deleted."
   end
