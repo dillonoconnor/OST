@@ -8,7 +8,7 @@ class LikesController < ApplicationController
   end
   
   def destroy
-    @like = current_user.likes.find_by(params[:playlist_id])
+    @like = current_user.likes.find_by(playlist_id: params[:playlist_id])
     @like.destroy
     redirect_to root_url
   end
