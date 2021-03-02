@@ -44,12 +44,34 @@ html {
 .navbar {
   background: transparent;
 }
+
+.navbar-burger {
+  color: #dbdbdb;
+  &:hover {
+    color: #fff;
+  }
+}
+
 .navbar-item, .label, h1.title {
   color: #fff;
 }
+
 .navbar-item:hover {
   font-weight: bold;
 }
+
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    background-color: #2a2a33;
+  }
+
+  a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, 
+  a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, 
+  .navbar-link:hover, .navbar-link.is-active {
+    background-color: #2a2a33;
+  }
+}
+
 // Table
 table a, .table thead th {
   color: #fff;
