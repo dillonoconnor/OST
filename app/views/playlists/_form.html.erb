@@ -31,15 +31,9 @@
 <% end %>
 
 <% if @playlists.present? %>
-<div class="content">
-<ul>
-  <% @playlists.each do |p| %>
-    <li>
-      <%= link_to p.name, playlists_path(playlist_id: p.id), 
-          method: :post, class: "has-text-link has-text-weight-semibold" %> :: 
-      <%= p.followers["total"] %> followers
-    </li>
-  <% end %>
+  <div class="content">
+    <ul>
+      <%= render partial: "playlist", collection: @playlists %>
+    </ul>
+  </div>
 <% end %>
-</ul>
-</div>

@@ -1,0 +1,5 @@
+<li>
+  <%= link_to playlist.name, playlists_path(playlist_id: playlist.id), 
+      method: :post, class: "has-text-link has-text-weight-semibold" %> :: 
+  <%= playlist.followers["total"] %> followers
+</li>
