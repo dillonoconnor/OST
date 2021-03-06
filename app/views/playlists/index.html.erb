@@ -15,24 +15,24 @@
                   <p class="subtitle is-6"><%= p.tracks.size %> tracks</p>
                   <div class="level is-mobile">
                     <div class="level-left">
-                      <div class="level-item mr-1">
-                        <% unless session[:spotify_user].nil? %>
+                      <% unless session[:spotify_user].nil? %>
+                        <div class="level-item mr-1">
                           <% if current_user && @follows.include?(p.id) %>
                             <%= button_to "Unfollow", unfollow_path(p), class: "button is-danger is-small", 
                             method: :delete %>
                           <% elsif current_user %>
                             <%= button_to "Follow on Spotify", follow_path(p), class: "button is-success is-small" %>
-                          <% end%>
-                        <% end %>
-                      </div>
+                          <% end%> 
+                        </div>
+                      <% end %>
                       <div class="level-item">
                         <% if current_user && @likes.include?(p.id) %>
                           <%= button_to "Unlike", unlike_path(p), class: "button is-link is-small",
                               method: :delete %>
                         <% elsif current_user %>
                           <%= button_to "Like ❤️", like_path(p), class: "button is-link is-small" %>
-                        <% end %>
                       </div>
+                      <% end %>
                     </div>
                     <div class="level-right">
                     </div>
