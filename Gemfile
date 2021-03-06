@@ -26,16 +26,6 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-gem 'bulma-rails', '~> 0.9.1'
-
-gem 'rspotify', '~> 2.10', '>= 2.10.1'
-
-gem 'figaro'
-
-gem 'inline_svg'
-
-gem 'will_paginate', '~> 3.1.0'
-
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
@@ -54,6 +44,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  #N+1 Warnings
+  gem "bullet", "~> 6.1"
 end
 
 group :test do
@@ -70,3 +62,15 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'bulma-rails', '~> 0.9.1'
+
+gem 'rspotify', '~> 2.10', '>= 2.10.1'
+
+gem 'figaro'
+
+gem 'inline_svg'
+
+gem 'will_paginate', '~> 3.1.0'
+
+gem "sidekiq", "~> 6.1"
