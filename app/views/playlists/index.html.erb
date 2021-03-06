@@ -22,7 +22,7 @@
                             method: :delete %>
                           <% elsif current_user %>
                             <%= button_to "Follow on Spotify", follow_path(p), class: "button is-success is-small" %>
-                          <% end%> 
+                          <% end%>
                         </div>
                       <% end %>
                       <div class="level-item">
@@ -31,8 +31,8 @@
                               method: :delete %>
                         <% elsif current_user %>
                           <%= button_to "Like ❤️", like_path(p), class: "button is-link is-small" %>
+                        <% end %>
                       </div>
-                      <% end %>
                     </div>
                     <div class="level-right">
                     </div>
