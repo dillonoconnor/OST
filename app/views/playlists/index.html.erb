@@ -1,7 +1,7 @@
 <div class="hero-body">
   <div class="columns is-multiline">
     <% @playlist.each do |p| %>
-      <div class="column is-one-fifth">
+      <div class="column is-3-desktop is-4-tablet">
           <div class="card">
             <div class="card-image">
               <figure class="image is-1by1">
@@ -13,16 +13,9 @@
                 <div class="media-content">
                   <p class="title is-6 has-text-weight-bold"><%= pretty_title(p.name) %></p>
                   <p class="subtitle is-6"><%= p.tracks.size %> tracks</p>
-                  <div class="level">
+                  <div class="level is-mobile">
                     <div class="level-left">
-                      <div class="level-item">
-                        <p class="is-size-7">
-                          <%= p.likes.size %> likes
-                        </p>
-                      </div>
-                    </div>
-                    <div class="level-right">
-                      <div class="level-item">
+                      <div class="level-item mr-1">
                         <% unless session[:spotify_user].nil? %>
                           <% if current_user && @follows.include?(p.id) %>
                             <%= button_to "Unfollow", unfollow_path(p), class: "button is-danger is-small", 
@@ -41,11 +34,24 @@
                         <% end %>
                       </div>
                     </div>
+                    <div class="level-right">
+                    </div>
                   </div>   
-                  <div class="content">
-                    <p class="is-size-7 is-family-secondary">
-                      Added <%= time_ago_in_words p.created_at %> ago
-                    </p>
+                  <div class="level is-mobile">
+                    <div class="level-left">
+                      <div class="level-item">
+                        <p class="is-size-7 is-family-secondary">
+                        Added <%= time_ago_in_words p.created_at %> ago
+                        </p>
+                      </div>
+                    </div>
+                    <div class="level-right">
+                      <div class="level-item">
+                        <p class="is-size-7">
+                          <%= p.likes.size %> likes
+                        </p>
+                      </div>
+                    </div>  
                   </div>   
                 </div>
               </div>

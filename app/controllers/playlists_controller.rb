@@ -6,9 +6,9 @@ class PlaylistsController < ApplicationController
   def index
     case params[:filter]
     when "popular"
-      @playlist = Playlist.popular.paginate(page: params[:page], per_page: 10)
+      @playlist = Playlist.popular.paginate(page: params[:page], per_page: 12)
     else
-      @playlist = Playlist.chronological.paginate(page: params[:page], per_page: 10)
+      @playlist = Playlist.chronological.paginate(page: params[:page], per_page: 12)
     end
     if current_user
       @follows = current_user.follows.map { |f| f.playlist_id }
