@@ -37,24 +37,30 @@
 <section class="section">
 <div class="columns">
   <div class="column is-half">
-    <h1 class="title is-4">
-      Leave a Comment
-    </h1>
-    <article class="media">
-      <div class="media-content">
-        <div class="field">
-          <%= form_with model: [@playlist, @comment], local: true do |f| %>
-            <div class="field">
-              <%= f.text_area :message, placeholder: "Add a comment", 
-                  class: "control textarea" %>
-            </div>
-            <div class="field">
-              <%= f.submit "Post Comment", class: "control button is-primary has-text-weight-semibold" %>
-            </div>
-          <% end %>
+    <% if current_user %>
+      <h1 class="title is-4">
+        Leave a Comment
+      </h1>
+      <article class="media">
+        <div class="media-content">
+          <div class="field">
+            <%= form_with model: [@playlist, @comment], local: true do |f| %>
+              <div class="field">
+                <%= f.text_area :message, placeholder: "Add a comment", 
+                    class: "control textarea" %>
+              </div>
+              <div class="field">
+                <%= f.submit "Post Comment", class: "control button is-primary has-text-weight-semibold" %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    <% else %>
+      <h1 class="title is-4">
+        Log In to Leave a Comment
+      </h1>
+    <% end %>
     <% if @comments.any? %>
     <ul class="mt-3">
       <% @comments.each do |c| %>
