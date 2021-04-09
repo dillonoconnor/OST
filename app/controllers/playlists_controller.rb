@@ -28,24 +28,13 @@ class PlaylistsController < ApplicationController
 
   def new
     if params[:playlist_name]
-      @playlists = search_playlists(params[:playlist_name])
+      @playlists = Playlist.search_playlists(params[:playlist_name])
     end
     @playlist = Playlist.new
   end
 
   def create
-    spotify_playlist = find_spotify_playlist
-    playlist = Playlist.new(
-      name: find_playlist_name(spotify_playlist),
-      image_url: find_picture(spotify_playlist),
-      spotify_id: find_spotify_id
-    )
-    spotify_playlist.tracks.each do |track|
-      playlist.tracks.new(
-        title: track.name, 
-        artist: track.artists.first.name
-      )
-    end
+    playlist = Playlist.prepare_playlist(params)
     if playlist.save
       redirect_to root_url, notice: "Successfully added playlist!"
     else
@@ -68,43 +57,6 @@ class PlaylistsController < ApplicationController
 
     def authorize
       RSpotify.authenticate(ENV["spotify_key"], ENV["spotify_secret"])
-    end
-
-    def playlist_params
-      params.require(:playlist).permit(:id)
-    end
-
-    def sanitize_playlist_params
-      if params[:playlist]
-        params[:playlist][:id].split("spotify:playlist:")[1]
-      elsif params[:playlist_id]
-        params[:playlist_id]
-      end
-    end
-
-    def find_spotify_playlist
-      id = sanitize_playlist_params
-      @playlist_id = RSpotify::Playlist.find_by_id(id)
-    end
-
-    def find_playlist_name(playlist)
-      playlist.name.split("OST")[0].strip
-    end
-
-    def find_picture(playlist)
-      playlist.images.first['url']
-    end
-
-    def find_spotify_id
-      if params[:playlist_id]
-        params[:playlist_id]
-      else
-        params[:playlist][:id].split("spotify:playlist:").first
-      end
-    end
-
-    def search_playlists(playlist)
-      RSpotify::Playlist.search(playlist)
     end
 
 end
