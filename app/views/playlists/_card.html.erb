@@ -15,7 +15,7 @@
               <% unless session[:spotify_user].nil? %>
                 <div class="level-item mr-1">
                   <%= turbo_frame_tag "#{dom_id(p)}_follow_button" do %>
-                    <% if follows.include?(p.id) %>
+                    <% if follows && follows.include?(p.id) %>
                       <%= button_to "Unfollow", unfollow_path(p), class: "button is-danger is-small", 
                       method: :delete %>
                     <% elsif current_user %>
@@ -24,13 +24,14 @@
                   <% end %>
                 </div>
               <% end %>
-
               <div class="level-item">
                 <%= turbo_frame_tag "#{dom_id(p)}_like_button" do %>
-                  <% if likes.include?(p.id) %>
-                    <%= render partial: "likes/unlike_button", locals: { p: p } %>
+                  <% if likes && likes.include?(p.id) %>
+                      <%= button_to "Unlike", unlike_path(p), class: "button is-link is-small", 
+                          "data-turbo-frame": "#{dom_id(p)}_likes", method: :delete %>
                   <% elsif current_user %>
-                    <%= render partial: "likes/like_button", locals: { p: p } %>
+                      <%= button_to "Like ❤️", like_path(p), class: "button is-link is-small", 
+                          "data-turbo-frame": "#{dom_id(p)}_likes" %>
                   <% end %>
                 <% end %>
               </div>
