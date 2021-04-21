@@ -43,7 +43,6 @@ group :development do
   # gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
   #N+1 Warnings
   gem "bullet", "~> 6.1"
 end
@@ -80,3 +79,5 @@ gem 'will_paginate', '~> 3.1.0'
 gem "sidekiq", "~> 6.1"
 
 gem "turbo-rails", "~> 0.5.9"
+
+gem 'spring'
