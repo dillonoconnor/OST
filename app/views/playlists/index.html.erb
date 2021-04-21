@@ -1,64 +1,6 @@
 <div class="hero-body">
   <div class="columns is-multiline">
-    <% @playlist.each do |p| %>
-      <div class="column is-3-desktop is-4-tablet">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-1by1">
-                <%= link_to image_tag(p.image_url), p %>
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-content">
-                  <p class="title is-6 has-text-weight-bold"><%= pretty_title(p.name) %></p>
-                  <p class="subtitle is-6"><%= p.tracks.size %> tracks</p>
-                  <div class="level is-mobile">
-                    <div class="level-left">
-                      <% unless session[:spotify_user].nil? %>
-                        <div class="level-item mr-1">
-                          <% if current_user && @follows.include?(p.id) %>
-                            <%= button_to "Unfollow", unfollow_path(p), class: "button is-danger is-small", 
-                            method: :delete %>
-                          <% elsif current_user %>
-                            <%= button_to "Follow on Spotify", follow_path(p), class: "button is-success is-small" %>
-                          <% end%>
-                        </div>
-                      <% end %>
-                      <div class="level-item">
-                        <% if current_user && @likes.include?(p.id) %>
-                          <%= button_to "Unlike", unlike_path(p), class: "button is-link is-small",
-                              method: :delete %>
-                        <% elsif current_user %>
-                          <%= button_to "Like ❤️", like_path(p), class: "button is-link is-small" %>
-                        <% end %>
-                      </div>
-                    </div>
-                    <div class="level-right">
-                    </div>
-                  </div>   
-                  <div class="level is-mobile">
-                    <div class="level-left">
-                      <div class="level-item">
-                        <p class="is-size-7 is-family-secondary">
-                        Added <%= time_ago_in_words p.created_at %> ago
-                        </p>
-                      </div>
-                    </div>
-                    <div class="level-right">
-                      <div class="level-item">
-                        <p class="is-size-7">
-                          <%= p.likes.size %> likes
-                        </p>
-                      </div>
-                    </div>  
-                  </div>   
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-    <% end %>
+    <%= render partial: "card", collection: @playlists, as: :p, locals: { follows: @follows, likes: @likes } %>
   </div>
     <%= will_paginate @playlist, class: "apple_pagination" %>
 </div>

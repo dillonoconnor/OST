@@ -1,0 +1,5 @@
+<%= turbo_stream.update("playlist_#{@playlist.id}_likes", 
+    partial: "likes/like_count", locals: { p: @playlist }) %>
+
+<%= turbo_stream.replace("playlist_#{@playlist.id}_like_button", 
+    partial: "likes/like_button", locals: { p: @playlist }) %>

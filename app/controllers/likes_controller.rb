@@ -3,14 +3,19 @@ class LikesController < ApplicationController
   before_action :set_playlist
 
   def create
-    @playlist.likers << current_user
-    redirect_to root_url
+    respond_to do |format|
+      @playlist.likers << current_user
+      format.turbo_stream
+    end
   end
   
   def destroy
-    @like = current_user.likes.find_by(playlist_id: params[:playlist_id])
-    @like.destroy
-    redirect_to root_url
+    respond_to do |format|
+      @like = current_user.likes.find_by(playlist_id: params[:playlist_id])
+      @like.destroy
+      set_playlist
+      format.turbo_stream
+    end
   end
 
 

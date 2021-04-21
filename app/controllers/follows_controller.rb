@@ -5,18 +5,22 @@ class FollowsController < ApplicationController
   before_action :find_spotify_user
 
   def create
-    @follow = @local_playlist.follows.create!(user_id: current_user.id)
-    @followed_playlists = @spotify_user.playlists.map { |p| p.name }
-    unless @followed_playlists.include?(@spotify_playlist.name)
-      @spotify_user.follow(@spotify_playlist)
+    respond_to do |format|
+      @follow = @local_playlist.follows.create!(user_id: current_user.id)
+      @followed_playlists = @spotify_user.playlists.map { |p| p.name }
+      unless @followed_playlists.include?(@spotify_playlist.name)
+        @spotify_user.follow(@spotify_playlist)
+      end
+      format.turbo_stream
     end
-    redirect_to root_url, notice: "Followed playlist on Spotify."
   end
 
   def destroy
-    @spotify_user.unfollow(@spotify_playlist)
-    current_user.follows.find_by(playlist_id: params[:playlist_id]).destroy
-    redirect_to root_url, alert: "Unfollowed playlist on Spotify."
+    respond_to do |format|
+      @spotify_user.unfollow(@spotify_playlist)
+      current_user.follows.find_by(playlist_id: params[:playlist_id]).destroy
+      format.turbo_stream
+    end
   end
 
     private

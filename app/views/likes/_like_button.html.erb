@@ -1,0 +1,4 @@
+<%= turbo_frame_tag "#{dom_id(p)}_like_button" do %>
+  <%= button_to "Like ❤️", like_path(p), class: "button is-link is-small", 
+                "data-turbo-frame": "#{dom_id(p)}_likes" %>
+<% end %>

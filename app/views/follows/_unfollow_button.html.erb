@@ -1,0 +1,4 @@
+<%= turbo_frame_tag "#{dom_id(p)}_follow_button" do %>
+  <%= button_to "Unfollow", unfollow_path(p), class: "button is-danger is-small", 
+  method: :delete %>
+<% end %>
