@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root "playlists#index"
   resources :users, except: [:index]
   resources :playlists do
-    resources :comments
+    resources :comments, only: [:create, :destroy]
   end
   resource :session, only: :create
 
