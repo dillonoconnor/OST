@@ -2,7 +2,7 @@ class PlaylistsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show, :spotify, :follow_playlist]
   before_action :authorize, only: [:create]
-  
+
   def index
     case params[:filter]
     when "popular"
@@ -15,7 +15,7 @@ class PlaylistsController < ApplicationController
       @likes = current_user.likes.map { |l| l.playlist_id }
     end
   end
-  
+
   def show
     @playlist = Playlist.find(params[:id])
     @tracks = Track.where("playlist_id = ?", @playlist.id)
@@ -36,6 +36,7 @@ class PlaylistsController < ApplicationController
   def create
     playlist = Playlist.prepare_playlist(params)
     if playlist.save
+      playlist.attach_image(params)
       redirect_to root_url, notice: "Successfully added playlist!"
     else
       render :new, alert: "There's a problem with the ID."
