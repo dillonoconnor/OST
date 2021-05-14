@@ -11,8 +11,13 @@ class Playlist < ApplicationRecord
   has_one_attached :playlist_image, dependent: :destroy
 
 
-  scope :chronological, -> { order("created_at desc") }
-  scope :popular, -> { left_joins(:likes).select('playlists.*, COUNT(playlist_id) AS count_of_likes').group('playlists.id').order('count_of_likes DESC') }
+  scope :chronological, -> { with_attached_playlist_image
+                             .order("created_at desc") }
+  scope :popular, -> { left_joins(:likes)
+                       .select('playlists.*, COUNT(playlist_id) AS count_of_likes')
+                       .group('playlists.id')
+                       .with_attached_playlist_image
+                       .order('count_of_likes DESC') }
 
   def self.prepare_playlist(params)
     playlist = Playlist.new
