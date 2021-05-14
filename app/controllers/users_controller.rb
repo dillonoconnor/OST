@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @likes = current_user.liked_playlists
+    @likes = current_user.liked_playlists.with_attached_playlist_image
   end
   
   def new
