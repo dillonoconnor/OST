@@ -16,16 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @tracks.each do |track| %>
-          <tr>
-            <td class="is-flex is-align-items-center">
-              <%= inline_svg_tag "youtube.svg", size: "3%", color: "white" %>
-              <span style="display: inline-block; width: 0.5rem"></span>
-              <%= youtube_search_link(track) %>
-            </td>
-            <td><%= track.artist %></td>
-          </tr>
-        <% end %>
+        <%= render partial: "track", collection: @tracks  %>
       </tbody>
     </table>
   </div>

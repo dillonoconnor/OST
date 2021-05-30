@@ -21,14 +21,14 @@
     </div>
     <div class="navbar-end">
       <div class="navbar-item">
-        <div class="buttons">
+        <div class="is-grouped">
           <% if current_user %>
             <%= link_to current_user.username, current_user, class: "button has-text-weight-semibold" %>
-            <%= link_to "Sign Out", logout_path, class: "button is-dark has-text-weight-semibold",
+            <%= link_to "Sign Out", logout_path, class: "button has-text-weight-semibold",
                         method: :delete %>
           <% else %>
-            <%= link_to "Sign Up", new_user_path, class: "button is-primary has-text-weight-semibold" %>
-            <%= link_to "Log In", login_path, class: "button is-dark has-text-weight-semibold" %>
+            <%= link_to "Sign Up", new_user_path, class: "button has-text-weight-semibold" %>
+            <%= link_to "Log In", login_path, class: "button has-text-weight-semibold" %>
           <% end %>
           <% if current_user && session[:spotify_user].nil? %>
             <%= link_to 'Link Spotify', '/auth/spotify', class: "button is-success has-text-weight-semibold" %>

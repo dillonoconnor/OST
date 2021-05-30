@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def show
     @likes = current_user.liked_playlists.with_attached_playlist_image
   end
-  
+
   def new
     @user = User.new
   end
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to root_url
   end
-  
+
   private
 
     def user_params

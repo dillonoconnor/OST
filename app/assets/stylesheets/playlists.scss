@@ -9,6 +9,7 @@
 .card:hover {
   transition-duration: 0.3s;
   opacity: 1;
+  transform: scale(1.01);
 }
 
 .apple_pagination {
